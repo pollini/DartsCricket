@@ -15,6 +15,9 @@
 		C06DF4821D578064004C46A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C06DF4801D578064004C46A2 /* LaunchScreen.storyboard */; };
 		C06DF48D1D578064004C46A2 /* Darts_CricketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06DF48C1D578064004C46A2 /* Darts_CricketTests.swift */; };
 		C06DF4981D578064004C46A2 /* Darts_CricketUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06DF4971D578064004C46A2 /* Darts_CricketUITests.swift */; };
+		C06DF4A61D57CABB004C46A2 /* CricketPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06DF4A51D57CABB004C46A2 /* CricketPlayer.swift */; };
+		C07C88A71D592D3B0029B279 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07C88A61D592D3B0029B279 /* GameViewController.swift */; };
+		C07C88A91D5A944E0029B279 /* NewGameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07C88A81D5A944E0029B279 /* NewGameTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		C06DF4931D578064004C46A2 /* Darts CricketUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Darts CricketUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C06DF4971D578064004C46A2 /* Darts_CricketUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Darts_CricketUITests.swift; sourceTree = "<group>"; };
 		C06DF4991D578064004C46A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C06DF4A51D57CABB004C46A2 /* CricketPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CricketPlayer.swift; path = "Data Model/CricketPlayer.swift"; sourceTree = "<group>"; };
+		C07C88A61D592D3B0029B279 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		C07C88A81D5A944E0029B279 /* NewGameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +112,9 @@
 				C06DF47E1D578064004C46A2 /* Assets.xcassets */,
 				C06DF4801D578064004C46A2 /* LaunchScreen.storyboard */,
 				C06DF4831D578064004C46A2 /* Info.plist */,
+				C07C88A61D592D3B0029B279 /* GameViewController.swift */,
+				C07C88A81D5A944E0029B279 /* NewGameTableViewController.swift */,
+				C06DF4A71D57CABF004C46A2 /* Data Model */,
 			);
 			path = "Darts Cricket";
 			sourceTree = "<group>";
@@ -126,6 +135,14 @@
 				C06DF4991D578064004C46A2 /* Info.plist */,
 			);
 			path = "Darts CricketUITests";
+			sourceTree = "<group>";
+		};
+		C06DF4A71D57CABF004C46A2 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				C06DF4A51D57CABB004C46A2 /* CricketPlayer.swift */,
+			);
+			name = "Data Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +213,7 @@
 				TargetAttributes = {
 					C06DF4711D578064004C46A2 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 7W9442D67W;
 					};
 					C06DF4871D578064004C46A2 = {
 						CreatedOnToolsVersion = 7.3;
@@ -259,8 +277,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C07C88A71D592D3B0029B279 /* GameViewController.swift in Sources */,
+				C06DF4A61D57CABB004C46A2 /* CricketPlayer.swift in Sources */,
 				C06DF47A1D578064004C46A2 /* DetailViewController.swift in Sources */,
 				C06DF4781D578064004C46A2 /* MasterViewController.swift in Sources */,
+				C07C88A91D5A944E0029B279 /* NewGameTableViewController.swift in Sources */,
 				C06DF4761D578064004C46A2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,10 +426,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Darts Cricket/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.mvp-systems.Darts-Cricket";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -416,10 +440,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Darts Cricket/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.mvp-systems.Darts-Cricket";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -488,6 +515,7 @@
 				C06DF49E1D578064004C46A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C06DF49F1D578064004C46A2 /* Build configuration list for PBXNativeTarget "Darts CricketTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +524,7 @@
 				C06DF4A11D578064004C46A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C06DF4A21D578064004C46A2 /* Build configuration list for PBXNativeTarget "Darts CricketUITests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +533,7 @@
 				C06DF4A41D578064004C46A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
