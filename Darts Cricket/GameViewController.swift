@@ -35,7 +35,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         // TO DO: CollectionViewLayout for self.players.count
         let cVWidth = self.collectionView.frame.size.width
         let cVLayout = UICollectionViewFlowLayout()
-        cVLayout.itemSize = CGSize.init(width: cVWidth/CGFloat(self.players.count), height: cVWidth/CGFloat(self.players.count)/1.15)
+        cVLayout.itemSize = CGSize.init(width: cVWidth/CGFloat(self.players.count), height: 63.0)
         cVLayout.minimumInteritemSpacing = 0
         self.collectionView.collectionViewLayout = cVLayout
     }
@@ -242,6 +242,8 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                 // "On Fire"
                 if self.players[indexPath.item].onFire {
                     cell.backgroundColor = UIColor.redColor()
+                } else {
+                    cell.backgroundColor = UIColor.whiteColor()
                 }
             } else {
                 if row > 0 {
