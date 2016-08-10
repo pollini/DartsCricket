@@ -13,6 +13,7 @@ class NewGameTableViewController: UITableViewController {
     @IBOutlet weak var addBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var doneBarButtonItem: UIBarButtonItem!
     
+    //var players: [CricketPlayer] = [CricketPlayer(name: "PR"), CricketPlayer(name: "SH"), CricketPlayer(name: "P"), CricketPlayer(name: "MVP"), CricketPlayer(name: "MM")]
     var players: [CricketPlayer] = []
     var tapGestureRecognizer: UITapGestureRecognizer?
     
