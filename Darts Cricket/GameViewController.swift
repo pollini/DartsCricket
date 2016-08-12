@@ -138,6 +138,8 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             } else {
                 currentPlayer.onFire = true
             }
+        } else {
+            currentPlayer.onFire = false
         }
         
         for player in self.players {

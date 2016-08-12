@@ -10,80 +10,94 @@ import UIKit
 
 class CricketPlayer: NSObject {
     
+    // MARK: - Properties
+    // Note: The Fifteens the Player (still) needs.
     var fifteens: Int {
         didSet {
             if fifteens > 3 {
                 fifteens = 3
             }
-            self.checkStatus()
+            self.checkFinishedStatus()
         }
     }
     
+    // Note: The Sixteens the Player (still) needs.
     var sixteens: Int {
         didSet {
             if sixteens > 3 {
                 sixteens = 3
             }
-            self.checkStatus()
+            self.checkFinishedStatus()
         }
     }
     
+    // Note: The Seventeens the Player (still) needs.
     var seventeens: Int {
         didSet {
             if seventeens > 3 {
                 seventeens = 3
             }
-            self.checkStatus()
+            self.checkFinishedStatus()
         }
     }
     
+    // Note: The Eightteens the Player (still) needs.
     var eightteens: Int {
         didSet {
             if eightteens > 3 {
                 eightteens = 3
             }
-            self.checkStatus()
+            self.checkFinishedStatus()
         }
     }
     
+    // Note: The Nineteens the Player (still) needs.
     var nineteens: Int {
         didSet {
             if nineteens > 3 {
                 nineteens = 3
             }
-            self.checkStatus()
+            self.checkFinishedStatus()
         }
     }
     
+    // Note: The Twenties the Player (still) needs.
     var twenties: Int {
         didSet {
             if twenties > 3 {
                 twenties = 3
             }
-            self.checkStatus()
+            self.checkFinishedStatus()
         }
     }
     
+    // Note: The Bulls the Player (still) needs.
     var bulls: Int {
         didSet {
             if bulls > 3 {
                 bulls = 3
             }
-            self.checkStatus()
+            self.checkFinishedStatus()
         }
     }
     
+    // Note: The (overall) Points the Player has collected.
     var score: Int
     
+    // Note: Trivial.
     var name: String
     
+    // Note: A Bool for quickly indicating if the Player has striked all his Targets.
     var finished: Bool
     
+    // Note: A Bool indicating if the Player has not hit anything in the Round before.
     var onFire: Bool
     
+    // Note: An Optional for allocating an Image to the Player.
     var selfie: UIImage?
     
-
+    
+    // MARK: - Initializer
     init(name: String) {
         self.fifteens = 0
         self.sixteens = 0
@@ -102,6 +116,8 @@ class CricketPlayer: NSObject {
         self.onFire = false
     }
     
+    
+    // MARK: - Resetting the (Properties of the) Player. (e.g. for a new Game)
     func resetPlayer() {
         self.fifteens = 0
         self.sixteens = 0
@@ -116,7 +132,9 @@ class CricketPlayer: NSObject {
         self.onFire = false
     }
     
-    private func checkStatus() {
+    
+    // MARK: - Helper for checking the "finished" Bool of the Player.
+    private func checkFinishedStatus() {
         if self.bulls == 3 {
             if self.fifteens == 3 {
                 if self.sixteens == 3 {
