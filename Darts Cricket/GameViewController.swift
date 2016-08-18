@@ -35,8 +35,8 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         // TO DO: CollectionViewLayout for self.players.count
         let cVWidth = self.collectionView.frame.size.width
         let cVLayout = UICollectionViewFlowLayout()
-        cVLayout.itemSize = CGSize.init(width: cVWidth/CGFloat(self.players.count), height: 63.0)
-        cVLayout.minimumInteritemSpacing = 0
+        cVLayout.itemSize = CGSize.init(width: cVWidth/CGFloat(self.players.count)-1, height: 63.0)
+        cVLayout.minimumInteritemSpacing = 1
         self.collectionView.collectionViewLayout = cVLayout
     }
 
@@ -167,7 +167,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                 }
             }
             
-            print("\(player.name) - score: \(player.score) - 15: \(player.fifteens) - 16: \(player.sixteens) - 17: \(player.seventeens) - 18: \(player.eightteens) - 19: \(player.nineteens) - 20: \(player.twenties) - B: \(player.bulls)")
+            //print("\(player.name) - score: \(player.score) - 15: \(player.fifteens) - 16: \(player.sixteens) - 17: \(player.seventeens) - 18: \(player.eightteens) - 19: \(player.nineteens) - 20: \(player.twenties) - B: \(player.bulls)")
         }
         
         self.collectionView.reloadData()
@@ -176,7 +176,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         let leadingPlayer = self.players.minElement { (player1: CricketPlayer, player2: CricketPlayer) -> Bool in
             return player1.score < player2.score
         }
-        print("leadingPlayer: \(leadingPlayer!.name)")
+        //print("leadingPlayer: \(leadingPlayer!.name)")
         
         if currentPlayer.finished && leadingPlayer == currentPlayer {
             // Current Player has finished the Game.
@@ -235,7 +235,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         } else {
             row = indexPath.item/self.players.count
         }
-        print("column: \(column) - row: \(row)")
+        //print("column: \(column) - row: \(row)")
         
         if indexPath.section == 0 {
             // Fifteens, Sixteens and so on...
