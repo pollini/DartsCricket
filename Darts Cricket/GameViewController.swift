@@ -128,7 +128,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         if nullRound {
             if currentPlayer.onFire {
-                let alertController = UIAlertController(title: "2. NULLRUNDE!", message: "Schnapsal!", preferredStyle: .Alert)
+                let alertController = UIAlertController(title: "2nd Null Round!", message: "<Insert Penalty Message here>", preferredStyle: .Alert)
                 let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 alertController.addAction(defaultAction)
                 self.presentViewController(alertController, animated: true, completion: { 
@@ -180,8 +180,8 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         if currentPlayer.finished && leadingPlayer == currentPlayer {
             // Current Player has finished the Game.
-            let alertController = UIAlertController(title: "\(currentPlayer.name) wins!", message: "Alle anderen trinken jetzt 'nen Schnaps!", preferredStyle: .Alert)
-            let defaultAction = UIAlertAction(title: "Cheers Cunts!", style: .Destructive, handler: { (action: UIAlertAction) in
+            let alertController = UIAlertController(title: "\(currentPlayer.name) wins!", message: "<Insert potential Penalty Message for all other Players here>", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "Game Over", style: .Destructive, handler: { (action: UIAlertAction) in
                 for player in self.players {
                     player.resetPlayer()
                 }
