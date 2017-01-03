@@ -10,8 +10,9 @@ import UIKit
 
 class CricketPlayer: NSObject {
     
+    
     // MARK: - Properties
-    // Note: The Fifteens the Player (still) needs.
+    // Note: The Fifteens the Player has scored.
     var fifteens: Int {
         didSet {
             if fifteens > 3 {
@@ -21,7 +22,7 @@ class CricketPlayer: NSObject {
         }
     }
     
-    // Note: The Sixteens the Player (still) needs.
+    // Note: The Sixteens the Player has scored.
     var sixteens: Int {
         didSet {
             if sixteens > 3 {
@@ -31,7 +32,7 @@ class CricketPlayer: NSObject {
         }
     }
     
-    // Note: The Seventeens the Player (still) needs.
+    // Note: The Seventeens the Player has scored.
     var seventeens: Int {
         didSet {
             if seventeens > 3 {
@@ -41,7 +42,7 @@ class CricketPlayer: NSObject {
         }
     }
     
-    // Note: The Eightteens the Player (still) needs.
+    // Note: The Eightteens the Player has scored.
     var eightteens: Int {
         didSet {
             if eightteens > 3 {
@@ -51,7 +52,7 @@ class CricketPlayer: NSObject {
         }
     }
     
-    // Note: The Nineteens the Player (still) needs.
+    // Note: The Nineteens the Player has scored.
     var nineteens: Int {
         didSet {
             if nineteens > 3 {
@@ -61,7 +62,7 @@ class CricketPlayer: NSObject {
         }
     }
     
-    // Note: The Twenties the Player (still) needs.
+    // Note: The Twenties the Player has scored.
     var twenties: Int {
         didSet {
             if twenties > 3 {
@@ -71,7 +72,7 @@ class CricketPlayer: NSObject {
         }
     }
     
-    // Note: The Bulls the Player (still) needs.
+    // Note: The Bulls the Player has scored.
     var bulls: Int {
         didSet {
             if bulls > 3 {
@@ -97,7 +98,7 @@ class CricketPlayer: NSObject {
     var selfie: UIImage?
     
     
-    // MARK: - Initializer
+    // MARK: - Initializers
     init(name: String) {
         self.fifteens = 0
         self.sixteens = 0
@@ -116,6 +117,23 @@ class CricketPlayer: NSObject {
         self.onFire = false
     }
     
+    init(cricketPlayer: CricketPlayer) {
+        self.fifteens = cricketPlayer.fifteens
+        self.sixteens = cricketPlayer.sixteens
+        self.seventeens = cricketPlayer.seventeens
+        self.eightteens = cricketPlayer.eightteens
+        self.nineteens = cricketPlayer.nineteens
+        self.twenties = cricketPlayer.twenties
+        self.bulls = cricketPlayer.bulls
+        
+        self.score = cricketPlayer.score
+        
+        self.name = cricketPlayer.name
+        
+        self.finished = cricketPlayer.finished
+        
+        self.onFire = cricketPlayer.onFire
+    }
     
     // MARK: - Resetting the (Properties of the) Player. (e.g. for a new Game)
     func resetPlayer() {
@@ -150,5 +168,11 @@ class CricketPlayer: NSObject {
                 }
             }
         }
+    }
+    
+    
+    // MARK: - NSCopying Protocol
+    func copyWithZone(zone: NSZone) -> CricketPlayer {
+        return CricketPlayer(cricketPlayer: self)
     }
 }

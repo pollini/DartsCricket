@@ -143,6 +143,7 @@ class NewGameTableViewController: UITableViewController {
         }
         addAction.enabled = false
         
+        // Creating a new User is only possible if the Textfield for the Username is not empty.
         alertController.addTextFieldWithConfigurationHandler { (textField: UITextField) in
             textField.placeholder = "Name"
             NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue(), usingBlock: { (note: NSNotification) in

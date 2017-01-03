@@ -16,6 +16,7 @@
 		C06DF4A61D57CABB004C46A2 /* CricketPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06DF4A51D57CABB004C46A2 /* CricketPlayer.swift */; };
 		C07C88A71D592D3B0029B279 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07C88A61D592D3B0029B279 /* GameViewController.swift */; };
 		C07C88A91D5A944E0029B279 /* NewGameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07C88A81D5A944E0029B279 /* NewGameTableViewController.swift */; };
+		C07CB8811E1B2DF9000BEF87 /* DartThrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CB8801E1B2DF9000BEF87 /* DartThrow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		C06DF4A51D57CABB004C46A2 /* CricketPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CricketPlayer.swift; path = "Data Model/CricketPlayer.swift"; sourceTree = "<group>"; };
 		C07C88A61D592D3B0029B279 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		C07C88A81D5A944E0029B279 /* NewGameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGameTableViewController.swift; sourceTree = "<group>"; };
+		C07CB8801E1B2DF9000BEF87 /* DartThrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DartThrow.swift; path = "Data Model/DartThrow.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				C06DF4A51D57CABB004C46A2 /* CricketPlayer.swift */,
+				C07CB8801E1B2DF9000BEF87 /* DartThrow.swift */,
 			);
 			name = "Data Model";
 			sourceTree = "<group>";
@@ -208,13 +211,16 @@
 					C06DF4711D578064004C46A2 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 7W9442D67W;
+						LastSwiftMigration = 0800;
 					};
 					C06DF4871D578064004C46A2 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 						TestTargetID = C06DF4711D578064004C46A2;
 					};
 					C06DF4921D578064004C46A2 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 						TestTargetID = C06DF4711D578064004C46A2;
 					};
 				};
@@ -271,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C07CB8811E1B2DF9000BEF87 /* DartThrow.swift in Sources */,
 				C07C88A71D592D3B0029B279 /* GameViewController.swift in Sources */,
 				C06DF4A61D57CABB004C46A2 /* CricketPlayer.swift in Sources */,
 				C07C88A91D5A944E0029B279 /* NewGameTableViewController.swift in Sources */,
@@ -425,6 +432,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "de.mvp-systems.Darts-Cricket";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -439,6 +447,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "de.mvp-systems.Darts-Cricket";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -450,6 +459,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.mvp-systems.Darts-CricketTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Darts Cricket.app/Darts Cricket";
 			};
 			name = Debug;
@@ -462,6 +472,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.mvp-systems.Darts-CricketTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Darts Cricket.app/Darts Cricket";
 			};
 			name = Release;
@@ -473,6 +484,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.mvp-systems.Darts-CricketUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = "Darts Cricket";
 			};
 			name = Debug;
@@ -484,6 +496,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.mvp-systems.Darts-CricketUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = "Darts Cricket";
 			};
 			name = Release;

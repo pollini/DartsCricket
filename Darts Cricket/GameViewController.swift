@@ -21,9 +21,18 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var twentiesSegment: UISegmentedControl!
     @IBOutlet weak var bullsSegment: UISegmentedControl!
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var undoButton: UIButton!
     
     var players: [CricketPlayer] = []
     var currentPlayerIndex = 0
+    
+    var dartThrows: [DartThrow] = [] {
+        didSet {
+            self.undoButton.enabled = dartThrows.count > 0
+        }
+    }
+    
+    let penaltyMessage = "<Insert Penalty Message here>"
     
     
     override func viewDidLoad() {
@@ -31,8 +40,9 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
 
         // Do any additional setup after loading the view.
         self.playerNameLabel.text = self.players[self.currentPlayerIndex].name
+        self.undoButton.enabled = dartThrows.count > 0
         
-        // TO DO: CollectionViewLayout for self.players.count
+        // TO DO: Improve Layout for large Number of Players (e.g. more than 5-6).
         let cVWidth = self.collectionView.frame.size.width
         let cVLayout = UICollectionViewFlowLayout()
         cVLayout.itemSize = CGSize.init(width: cVWidth/CGFloat(self.players.count)-1, height: 63.0)
@@ -61,6 +71,20 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBAction func submitButtonPressed(sender: AnyObject) {
         
         let currentPlayer = self.players[self.currentPlayerIndex]
+        let currentPlayers = self.players.map{ $0.copy() } as! [CricketPlayer]
+        
+        // Create a new Object holding necessary Information of the (submitted) Throw.
+        let dartThrow = DartThrow(player: currentPlayer,
+                                  players: currentPlayers,
+                                  fifteens: self.fifteensSegment.selectedSegmentIndex,
+                                  sixteens: self.sixteensSegment.selectedSegmentIndex,
+                                  seventeens: self.seventeensSegment.selectedSegmentIndex,
+                                  eightteens: self.eightteensSegment.selectedSegmentIndex,
+                                  nineteens: self.nineteensSegment.selectedSegmentIndex,
+                                  twenties: self.twentiesSegment.selectedSegmentIndex,
+                                  bulls: self.bullsSegment.selectedSegmentIndex)
+        self.dartThrows.append(dartThrow)
+        
         var nullRound = true
         
         var remainingFifteens = self.fifteensSegment.selectedSegmentIndex
@@ -128,7 +152,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         if nullRound {
             if currentPlayer.onFire {
-                let alertController = UIAlertController(title: "2nd Null Round!", message: "<Insert Penalty Message here>", preferredStyle: .Alert)
+                let alertController = UIAlertController(title: "2nd Null Round!", message: self.penaltyMessage, preferredStyle: .Alert)
                 let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 alertController.addAction(defaultAction)
                 self.presentViewController(alertController, animated: true, completion: { 
@@ -195,6 +219,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             self.playerNameLabel.text = self.players[self.currentPlayerIndex].name
         }
         
+        // Reset all UI Elements.
         self.fifteensSegment.selectedSegmentIndex = 0
         self.sixteensSegment.selectedSegmentIndex = 0
         self.seventeensSegment.selectedSegmentIndex = 0
@@ -416,6 +441,36 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         return cell
     }
     
-    // TO DO: "Revert Submit".
-
+    
+    // MARK: - "undo last Submit"-Functionality
+    @IBAction func undoButtonPressed(sender: AnyObject) {
+        if let lastThrow = self.dartThrows.last {
+            
+            let alertController = UIAlertController(title: "Revert last Submit?", message: "Are you sure the following Throw should be reverted? \n\n \(lastThrow.throwingPlayer.name) \n 15s: \(lastThrow.scoredFifteens) \n 16s: \(lastThrow.scoredSixteens) \n 17s: \(lastThrow.scoredSeventeens) \n 18s: \(lastThrow.scoredEightteens) \n 19s: \(lastThrow.scoredNineteens) \n 20s: \(lastThrow.scoredTwenties) \n Bulls: \(lastThrow.scoredBulls)", preferredStyle: .Alert)
+            
+            let undoAction = UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction) in
+                self.undoLastSubmit()
+            })
+            alertController.addAction(undoAction)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            self.presentViewController(alertController, animated: true, completion:nil)
+        }
+    }
+    
+    func undoLastSubmit() {
+        if let lastThrow = self.dartThrows.last {
+            self.currentPlayerIndex = self.currentPlayerIndex > 0 ? self.currentPlayerIndex - 1 : self.players.count - 1
+            //self.currentPlayerIndex = self.currentPlayerIndex - 1 + self.players.count
+            self.playerNameLabel.text = self.players[self.currentPlayerIndex].name
+            
+            self.players = lastThrow.players
+            
+            self.dartThrows.removeLast()
+            
+            self.collectionView.reloadData()
+        }
+    }
 }
