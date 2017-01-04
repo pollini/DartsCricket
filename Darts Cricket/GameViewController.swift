@@ -8,8 +8,13 @@
 
 import UIKit
 
-class GameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+protocol UpdatePlayersProtocol {
+    func updatePlayers(cricketPlayers: [CricketPlayer])
+}
 
+class GameViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var gameView: UIView!
     @IBOutlet weak var playerNameLabel: UILabel!
@@ -23,18 +28,23 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var undoButton: UIButton!
     
+    // MARK: - Properties
     var players: [CricketPlayer] = []
     var currentPlayerIndex = 0
     
     var dartThrows: [DartThrow] = [] {
+        // Only enable the "undo"-Button if dartThrows contains at least one Element.
         didSet {
             self.undoButton.enabled = dartThrows.count > 0
         }
     }
     
-    let penaltyMessage = "<Insert Penalty Message here>"
+    var delegate: Any?
+    
+    private let penaltyMessage = "<Insert Penalty Message here>"
     
     
+    // MARK: - View Loading
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,6 +60,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         self.collectionView.collectionViewLayout = cVLayout
     }
 
+    // MARK: - Memory Warning
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -190,8 +201,6 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
                     player.score += remainingBulls * 25
                 }
             }
-            
-            //print("\(player.name) - score: \(player.score) - 15: \(player.fifteens) - 16: \(player.sixteens) - 17: \(player.seventeens) - 18: \(player.eightteens) - 19: \(player.nineteens) - 20: \(player.twenties) - B: \(player.bulls)")
         }
         
         self.collectionView.reloadData()
@@ -254,13 +263,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         let label = cell.viewWithTag(1337) as! UILabel
         //label.text = self.players[indexPath.item % self.players.count].name
         let column = indexPath.item%self.players.count
-        var row: Int
-        if indexPath.item == 0 {
-            row = 0
-        } else {
-            row = indexPath.item/self.players.count
-        }
-        //print("column: \(column) - row: \(row)")
+        let row: Int = indexPath.item == 0 ? 0 : indexPath.item/self.players.count
         
         if indexPath.section == 0 {
             // Fifteens, Sixteens and so on...
@@ -431,11 +434,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             
         } else {
             // Score
-            if row == 0 {
-                label.text = self.players[column].name
-            } else {
-                label.text = "\(self.players[column].score)"
-            }
+            label.text = row == 0 ? self.players[column].name : "\(self.players[column].score)"
         }
         
         return cell
@@ -446,6 +445,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBAction func undoButtonPressed(sender: AnyObject) {
         if let lastThrow = self.dartThrows.last {
             
+            // TO DO: Nicer Layout/Design of displaying last Throw.
             let alertController = UIAlertController(title: "Revert last Submit?", message: "Are you sure the following Throw should be reverted? \n\n \(lastThrow.throwingPlayer.name) \n 15s: \(lastThrow.scoredFifteens) \n 16s: \(lastThrow.scoredSixteens) \n 17s: \(lastThrow.scoredSeventeens) \n 18s: \(lastThrow.scoredEightteens) \n 19s: \(lastThrow.scoredNineteens) \n 20s: \(lastThrow.scoredTwenties) \n Bulls: \(lastThrow.scoredBulls)", preferredStyle: .Alert)
             
             let undoAction = UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction) in
@@ -463,10 +463,14 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     func undoLastSubmit() {
         if let lastThrow = self.dartThrows.last {
             self.currentPlayerIndex = self.currentPlayerIndex > 0 ? self.currentPlayerIndex - 1 : self.players.count - 1
-            //self.currentPlayerIndex = self.currentPlayerIndex - 1 + self.players.count
             self.playerNameLabel.text = self.players[self.currentPlayerIndex].name
             
             self.players = lastThrow.players
+            
+            // Update the Players in the VC that pushed this VC.
+            if let parentVC = self.delegate as? NewGameTableViewController {
+                parentVC.updatePlayers(lastThrow.players)
+            }
             
             self.dartThrows.removeLast()
             

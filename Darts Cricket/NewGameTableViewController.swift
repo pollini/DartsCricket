@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewGameTableViewController: UITableViewController {
+class NewGameTableViewController: UITableViewController, UpdatePlayersProtocol {
 
     @IBOutlet weak var addBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var doneBarButtonItem: UIBarButtonItem!
@@ -118,7 +118,6 @@ class NewGameTableViewController: UITableViewController {
     
 
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
@@ -126,10 +125,12 @@ class NewGameTableViewController: UITableViewController {
         if segue.identifier == "pushToGameVC" {
             let gameViewController = segue.destinationViewController as! GameViewController
             gameViewController.players = self.players
+            gameViewController.delegate = self
         }
     }
     
     
+    // MARK: - Action for adding a new Player to the Game.
     @IBAction func addPlayer(sender: AnyObject) {
         let alertController = UIAlertController(title: "Add new Player", message: "Please enter a Name", preferredStyle: .Alert)
         
@@ -159,6 +160,8 @@ class NewGameTableViewController: UITableViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
     }
 
+    
+    // MARK: - Action for starting a new Game.
     @IBAction func doneButtonPressed(sender: AnyObject) {
         if self.players.count > 1 {
             self.performSegueWithIdentifier("pushToGameVC", sender: sender)
@@ -188,6 +191,7 @@ class NewGameTableViewController: UITableViewController {
         }
     }
     
+    
     // MARK: - Action for Tap Gesture Recognizer
     func handleTap(sender: UITapGestureRecognizer) {
         if sender.state == .Ended {
@@ -196,5 +200,11 @@ class NewGameTableViewController: UITableViewController {
                 self.tableView.removeGestureRecognizer(self.tapGestureRecognizer!)
             }
         }
+    }
+    
+    
+    // MARK: - UpdatePlayersProtocol
+    func updatePlayers(cricketPlayers: [CricketPlayer]) {
+        self.players = cricketPlayers
     }
 }
