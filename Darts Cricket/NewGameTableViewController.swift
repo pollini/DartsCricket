@@ -125,7 +125,7 @@ class NewGameTableViewController: UITableViewController, UpdatePlayersProtocol {
         if segue.identifier == "pushToGameVC" {
             let gameViewController = segue.destinationViewController as! GameViewController
             gameViewController.players = self.players
-            gameViewController.delegate = self
+            gameViewController.playerDelegate = self
         }
     }
     

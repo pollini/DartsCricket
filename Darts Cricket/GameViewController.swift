@@ -30,7 +30,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     // MARK: - Properties
     var players: [CricketPlayer] = []
-    var currentPlayerIndex = 0
+    private var currentPlayerIndex = 0
     
     var dartThrows: [DartThrow] = [] {
         // Only enable the "undo"-Button if dartThrows contains at least one Element.
@@ -39,7 +39,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
-    var delegate: Any?
+    var playerDelegate: Any?
     
     private let penaltyMessage = "<Insert Penalty Message here>"
     
@@ -468,7 +468,7 @@ class GameViewController: UIViewController, UICollectionViewDataSource, UICollec
             self.players = lastThrow.players
             
             // Update the Players in the VC that pushed this VC.
-            if let parentVC = self.delegate as? NewGameTableViewController {
+            if let parentVC = self.playerDelegate as? NewGameTableViewController {
                 parentVC.updatePlayers(lastThrow.players)
             }
             
